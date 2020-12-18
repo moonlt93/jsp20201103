@@ -6,14 +6,14 @@
 
 <% request.setCharacterEncoding("utf-8"); %>
 <%
+String eno = request.getParameter("eno");
 String sql = "SELECT e.eno, e.ename, e.job, m.ename " 
-        + " , e.hiredate, e.salary, d.dname, s.grade "
-        + "FROM employee e, employee m, department d, salgrade s "
-        + "WHERE e.manager = m.eno" 
-        + "WHERE e.manager = m.eno(+)" 
-        + " AND e.dno = d.dno "
-        + " AND e.salary BETWEEN s.losal AND s.hisal "
-        + " AND e.eno = ?";
+           + " , e.hiredate, e.salary, d.dname, s.grade "
+           + "FROM employee e, employee m, department d, salgrade s "
+           + "WHERE e.manager = m.eno(+)" 
+           + " AND e.dno = d.dno "
+           + " AND e.salary BETWEEN s.losal AND s.hisal "
+           + " AND e.eno = ?";
 Class.forName("oracle.jdbc.driver.OracleDriver");
 String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 String id = "c##mydbms";
@@ -24,64 +24,18 @@ pstmt.setInt(1, Integer.valueOf(eno));
 ResultSet rs = pstmt.executeQuery();
 Employee emp = null;
 if (rs.next()) {
-int col = 1;
-emp = new Employee();
-emp.setEno(rs.getInt(col++));
-emp.setEname(rs.getString(col++));
-emp.setJob(rs.getString(col++));
-emp.setManagerName(rs.getString(col++));
-emp.setHireDate(rs.getTimestamp(col++).toLocalDateTime());
-emp.setSalary(rs.getInt(col++));
-emp.setDname(rs.getString(col++));
-emp.setGrade(rs.getInt(col++));
+  int col = 1;
+  emp = new Employee();
+  emp.setEno(rs.getInt(col++));
+  emp.setEname(rs.getString(col++));
+  emp.setJob(rs.getString(col++));
+  emp.setManagerName(rs.getString(col++));
+  emp.setHireDate(rs.getTimestamp(col++).toLocalDateTime());
+  emp.setSalary(rs.getInt(col++));
+  emp.setDname(rs.getString(col++));
+  emp.setGrade(rs.getInt(col++));
 }
 %>
-
-
-
-
-
-
-
-%>
-
-/* if (rs.next()) {
-/*   emp = new Employee();
-  emp.setEno(rs.getInt(1));
-  emp.setEname(rs.getString(2));
-  emp.setHireDate(rs.getTimestamp(3).toLocalDateTime());
-  emp.setSalary(rs.getInt(4));
-  emp.setDname(rs.getString(5));
-  emp.setJob(rs.getString(6));
-  emp.setGrade(rs.getInt(7)); 
- 
-	  int col = 1;
-	  emp = new Employee();
-	  emp.setEno(rs.getInt(col++));
-	  emp.setEname(rs.getString(col++));
-	  emp.setJob(rs.getString(col++));
-	  emp.setHireDate(rs.getTimestamp(col++).toLocalDateTime());
-	  emp.setSalary(rs.getInt(col++));
-	  emp.setDname(rs.getString(col++));
-	  emp.setGrade(rs.getInt(col++));
-	  emp.setManager(rs.getString(col++));
-	} 
-*/
-
-/* List<Employee> list = new ArrayList<>();
-
-while (rs.next()) {
-	
-	  list.add(rs.getInt(1));
-	  list.add(rs.getString(2));
-	  list.add(rs.getString(3));
-	  list.add(rs.getTimestamp(4).toLocalDateTime());
-	  list.add(rs.getString(5));
-	  list.add(rs.getInt(6));
-	  list.add(rs.getString(7));
-	   
-	} */
-
 
 <!DOCTYPE html>
 <html>
@@ -99,16 +53,15 @@ while (rs.next()) {
   <ul>
     <li>사번 : <%= emp.getEno() %></li>
     <li>이름 : <%= emp.getEname() %></li>
+    <li>업무 : <%= emp.getJob() %></li>
     <li>입사일 : <%= emp.getHireDate() %></li>
+    <li>매니저 : <%= emp.getManagerName() %></li>
     <li>월급 : <%= emp.getSalary() %></li>
+    <li>등급 : <%= emp.getGrade() %></li>
     <li>부서 : <%= emp.getDname() %></li>
-  	<li>업무정보: <%=emp.getJob() %></li>
-  	<li>등급: <%=emp.getGrade() %></li>
-  	<li>이름: <%=emp.getManager() %></li>
   </ul>
 </div>
 
 </body>
-</html> 
 </html>
 

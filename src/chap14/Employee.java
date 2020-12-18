@@ -1,7 +1,7 @@
 package chap14;
 
 import java.time.LocalDateTime;
-
+// 자바 빈 이라고 함.
 public class Employee {
 	private int eno;
 	private String ename;

@@ -17,7 +17,7 @@
 초기화 파라미터 목록:
 <ul>
 <%
-Enumeration<String> initParamEnum = application.getInitParameterNames();
+Enumeration<String> initParamEnum = application.getInitParameterNames(); /* application 객체의 name파라미터 값을 읽어온다. */
 while (initParamEnum.hasMoreElements()) {
   String initParamName = initParamEnum.nextElement(); 
 %>

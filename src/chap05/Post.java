@@ -1,8 +1,16 @@
 package chap05;
 
 public class Post {
+	private int id;
 	private String title;
 	private String body;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getTitle() {
 		return title;
@@ -17,5 +25,5 @@ public class Post {
 		this.body = body;
 	}
 	
-
+	
 }
